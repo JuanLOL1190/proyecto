@@ -3,8 +3,10 @@ import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
+# Configuración de la página
 st.set_page_config(page_title="Proyecto Final - Estadística", layout="centered")
 
+# Título de la app
 st.title("📊 Proyecto Final de Estadística")
 st.subheader("Análisis Estadístico e Inferencia")
 
@@ -26,16 +28,18 @@ with tab1:
 
     st.code("10, 20, 15, 30, 25")
 
+    # Entrada de datos
     data_input = st.text_area("Datos:")
 
+    # Cargar datos al hacer click en el botón
     if st.button("Cargar datos"):
         try:
             data = [float(x.strip()) for x in data_input.split(",")]
             st.session_state["datos"] = data
             st.success("Datos cargados correctamente")
             st.write("Tamaño de la muestra:", len(data))
-        except:
-            st.error("Error al leer los datos")
+        except ValueError:
+            st.error("Error al leer los datos. Asegúrate de que sean números separados por comas.")
 
 # --------------------
 # PESTAÑA 2: MEDIDAS
@@ -46,21 +50,25 @@ with tab2:
     if "datos" in st.session_state:
         data = st.session_state["datos"]
 
+        # Calcular medidas
         media = np.mean(data)
         mediana = np.median(data)
         desviacion = np.std(data, ddof=1)
         varianza = np.var(data, ddof=1)
 
+        # Mostrar resultados
         st.write(f"**Media:** {media:.4f}")
         st.write(f"**Mediana:** {mediana:.4f}")
         st.write(f"**Desviación estándar:** {desviacion:.4f}")
         st.write(f"**Varianza:** {varianza:.4f}")
 
+        # Crear histograma
         st.subheader("Histograma")
         fig, ax = plt.subplots()
-        ax.hist(data, bins=10)
+        ax.hist(data, bins=10, color='skyblue', edgecolor='black')
         st.pyplot(fig)
 
+        # Explicación
         st.markdown("""
         ### 📌 Conceptos:
         - **Media:** promedio de los datos  
@@ -68,9 +76,8 @@ with tab2:
         - **Desviación estándar:** dispersión de los datos  
         - **Histograma:** representación gráfica de la distribución  
         """)
-
     else:
-        st.warning("Primero carga datos en la pestaña Calculadora")
+        st.warning("Primero carga los datos en la pestaña 'Calculadora'")
 
 # --------------------
 # PESTAÑA 3: INFERENCIA
@@ -105,9 +112,8 @@ with tab3:
 
         st.write(f"**Intervalo de confianza ({nivel}%):**")
         st.write(f"[{li:.4f}, {ls:.4f}]")
-
     else:
-        st.warning("Carga datos para aplicar inferencia")
+        st.warning("Carga los datos para aplicar inferencia")
 
 # --------------------
 # PESTAÑA 4: DOS POBLACIONES
@@ -142,8 +148,8 @@ with tab4:
             st.success("Cálculo exitoso")
             st.write(f"**Diferencia de medias:** {diff_medias:.4f}")
 
-        except:
-            st.error("Error en los datos")
+        except ValueError:
+            st.error("Error en los datos. Asegúrate de que sean números separados por comas.")
 
 # --------------------
 # PESTAÑA 5: ACERCA DE
@@ -165,3 +171,4 @@ with tab5:
 
     Desarrollado con **Python, Streamlit, NumPy y SciPy**.
     """)
+
