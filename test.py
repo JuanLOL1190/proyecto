@@ -338,7 +338,7 @@ export default function CalculadoraEstadistica() {
                   <code className="text-sm text-green-400 font-mono">$ echo "10, 20, 15, 30, 25, 18, 22"</code>
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-cyan-400 font-mono text-xs">[INPUT_BUFFER]</Label>
+                  <Label className="text-cyan-400 font-mono text-xs">[Ingrese_Datos]</Label>
                   <textarea 
                     value={inputDatos}
                     onChange={(e) => setInputDatos(e.target.value)}
@@ -454,9 +454,9 @@ export default function CalculadoraEstadistica() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-950 border-cyan-500/30">
-                      <SelectItem value="0.90" className="text-cyan-400 font-mono">90% confidence</SelectItem>
-                      <SelectItem value="0.95" className="text-cyan-400 font-mono">95% confidence</SelectItem>
-                      <SelectItem value="0.99" className="text-cyan-400 font-mono">99% confidence</SelectItem>
+                      <SelectItem value="0.90" className="text-cyan-400 font-mono">90% Confianza</SelectItem>
+                      <SelectItem value="0.95" className="text-cyan-400 font-mono">95% Confianza</SelectItem>
+                      <SelectItem value="0.99" className="text-cyan-400 font-mono">99% Confianza</SelectItem>
                     </SelectContent>
                   </Select>
                 </CardContent>
